@@ -1,0 +1,31 @@
+h1 {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+  }
+  
+  .navbar {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-link {
+    font-weight: 500;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+  
+  .dropdown-menu {
+    background-color: #e0e0e0;
+  }
+  
+  .btn-outline-primary {
+    border: 1px solid #007bff;
+    color: #007bff;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  

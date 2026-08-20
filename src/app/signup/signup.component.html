@@ -1,0 +1,33 @@
+<div class="album py-5 adddriver mb-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <!-- Form for signup -->
+                        <form (ngSubmit)="signupUser()">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" id="username" [(ngModel)]="username" class="form-control" placeholder="Enter Username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" [(ngModel)]="password" class="form-control" placeholder="Enter Password" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+                            </div>    
+
+                            <!-- Submit and Login buttons aligned at the same level -->
+                            <div class="d-flex justify-content-between mt-3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a type="button" class="btn btn-secondary" routerLink="/login">Login</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

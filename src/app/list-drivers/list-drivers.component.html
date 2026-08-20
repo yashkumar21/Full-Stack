@@ -1,0 +1,73 @@
+<h3 class="text-center my-2">Driver List</h3>
+
+<div class="container">
+    @if(driversList.length === 0) {
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <h3>No drivers available currently</h3>
+        </div>        
+    } @else {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">DriverID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">License</th>
+                    <th scope="col">Active Status</th>
+                    <th scope="col">Remove</th>
+                    <th scope="col">Packages</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(driver of driversList; track $index) {
+                    <tr>
+                        <th scope="row">{{ driver._id }}</th>  
+                        <td>{{ driver.driver_id }}</td>
+                        <td>{{ driver.driver_name | uppercase }}</td>
+                        <td>{{ driver.driver_department }}</td>
+                        <td>{{ driver.driver_licence }}</td>
+                        <td>{{ driver.driver_isActive }}</td>
+                        <td><button (click)="deleteDriver(driver._id)" class="btn btn-danger">X</button></td>
+                        <td><button (click)="getPackages(driver)" class="btn btn-danger">?</button></td>
+                    </tr>
+                    @if (driverPackage === driver) {
+                        <tr>
+                            <td colspan="8">
+                                @if (driver.driver_packages && driver.driver_packages.length > 0) {
+                                    <div class="d-flex justify-content-center align-items-center" style="min-height: 100px;">
+                                        <h5>Package Details</h5>
+                                    </div> 
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Package ID</th>
+                                                <th>Title</th>
+                                                <th>Weight</th>
+                                                <th>Destination</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for(package of driver.driver_packages; track $index) {
+                                                <tr>
+                                                    <td>{{ package._id }}</td>
+                                                    <td>{{ package.package_title }}</td>
+                                                    <td>{{ package.package_weight }}</td>
+                                                    <td>{{ package.package_destination }}</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                } @else {
+                                    <div class="d-flex justify-content-center align-items-center" style="min-height: 100px;">
+                                        <h3>No packages found</h3>
+                                    </div> 
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+</div>

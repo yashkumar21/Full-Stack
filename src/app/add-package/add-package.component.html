@@ -1,0 +1,44 @@
+<div class="album py-5 addpackage mb-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form (ngSubmit)="addPackage()">
+                            <div class="mb-3">
+                                <label for="Title" class="form-label">Title</label>
+                                <input type="text" [(ngModel)]="package.package_title" name="packageTitle" class="form-control" placeholder="Enter Package Title" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="packageDescription" class="form-label">Package Description</label>
+                                <input type="text" [(ngModel)]="package.description" name="packageDescription" class="form-control" placeholder="Enter Package Description" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="weight" class="form-label">Weight</label>
+                                <input type="number" [(ngModel)]="package.package_weight" name="packageWeight" class="form-control" placeholder="Enter Package Weight" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="destination" class="form-label">Destination</label>
+                                <input type="text" [(ngModel)]="package.package_destination" name="packageDestination" class="form-control" placeholder="Enter Package Destination" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="DriverID" class="form-label">Driver</label>
+                                <select [(ngModel)]="package.driver_id" name="packageDriverID" class="form-control" id="DriverID" required>
+                                    <option *ngFor="let driver of drivers" [value]="driver._id">{{ driver.driver_name }}</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 form-check form-switch">
+                                <input type="checkbox" [(ngModel)]="package.isAllocated" name="isAllocated" class="form-check-input" checked>
+                                <label class="form-check-label" for="activeSwitch">Is Allocated</label>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a type="button" class="btn btn-secondary" routerLink="/packages">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

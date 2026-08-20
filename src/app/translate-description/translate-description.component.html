@@ -1,0 +1,74 @@
+<div class="container mt-4">
+    <h2 class="text-center">Translate</h2>
+    
+    <ng-container *ngIf="packageList.length === 0; else packageTable">
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <h3>We have no Package at the moment</h3>
+        </div>
+    </ng-container>
+
+    <ng-template #packageTable>
+        <ng-container *ngFor="let package of packageList; let i = index;">
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Weight</th>
+                        <th>Destination</th>
+                        <th>Description</th>
+                        <th>Translate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{package._id}}</td>
+                        <td>{{package.package_title}}</td>
+                        <td>{{package.package_weight | kgToGrams}}</td>
+                        <td>{{package.package_destination}}</td>
+                        <td>{{package.description}}</td>
+                        <td>
+                            <button class="btn btn-success" (click)="translate(package, 0)">
+                                <i class="fa fa-language"></i> 
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Language Selection Dropdown -->
+            <div class="mt-4 mb-4">
+                <label for="languageSelect" class="form-label">Target Language</label>
+                <select id="languageSelect" class="form-select" [(ngModel)]="languageChosen">
+                    <option value="" disabled selected>Select Target Language</option>
+                    <option value="German">German</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="Russian">Russian</option>
+                </select>
+            </div>
+
+            <!-- Display translation result if available -->
+            <ng-container *ngIf="package.result.length > 0">
+                <div class="mt-4">
+                    <h4 class="text-center">Translation</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Text</th>
+                                <th class="text-center">Target Language</th>
+                                <th class="text-center">Translation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let translation of package.result; let i = index;">
+                                <td class="text-center">{{ translation.description }}</td>
+                                <td class="text-center">{{ translation.languageChosen }}</td>
+                                <td class="text-center">{{ translation.translation }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </ng-container>
+        </ng-container>
+    </ng-template>
+</div>

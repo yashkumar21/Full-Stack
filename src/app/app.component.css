@@ -1,0 +1,30 @@
+/* app.component.css */
+body, html {
+    margin: 0; /* Remove default margin */
+    height: 100vh; /* Ensure body and html take full viewport height */
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Stack elements vertically */
+    font-family: Arial, sans-serif; /* Change the font family */
+    background-color: #f0f0f0; /* Add a light background color */
+}
+
+main {
+    flex: 1; /* Allow the main element to grow and fill available space */
+    min-height: 75vh; /* Set the minimum height of the main element */
+    overflow-y: auto; /* Allow vertical scrolling */
+    padding: 20px; /* Add padding for better spacing */
+    background-color: #ffffff; /* Set a white background for the main content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+router-outlet {
+    display: block; /* Ensure the router outlet behaves as a block element */
+    margin-top: 10px; /* Add a top margin for spacing */
+}
+
+app-footer {
+    min-height: 0vh; /* Minimum height of the footer */
+    height: auto; /* Allow the footer height to expand if needed */
+    width: 100%; /* Full width */
+    position: relative; /* Relative to its normal position */
+}

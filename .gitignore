@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.angular/
+
+# Secrets — never commit
+backend/.env
+backend/service-account.json
+backend/FIT2095.json
+
+# Generated at runtime
+backend/audio/*.mp3
+
+# OS files
+.DS_Store

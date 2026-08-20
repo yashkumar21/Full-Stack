@@ -1,0 +1,21 @@
+<div class="container">
+    <h3 class="text-center my-2">Update Packages</h3>
+  
+    <!-- Form for updating package details -->
+    <form (ngSubmit)="updatePackage()" class="card shadow-sm p-3">
+        <!-- Package ID input field -->
+        <div class="mb-3">
+            <label for="_id" class="form-label">Package ID</label>
+            <input type="text" [(ngModel)]="package._id" name="_id" class="form-control" id="_id" placeholder="Enter MongoDB ID" required>
+        </div>
+        
+        <!-- Package Destination input field -->
+        <div class="mb-3">
+            <label for="packageDestination" class="form-label">Destination</label>
+            <input type="text" [(ngModel)]="package.package_destination" name="packageDestination" class="form-control" id="packageDestination" placeholder="Enter Package Destination" required>
+        </div>
+
+        <!-- Submit button to update package -->
+        <button type="submit" class="btn btn-primary">Update Package</button>
+    </form>
+</div>
