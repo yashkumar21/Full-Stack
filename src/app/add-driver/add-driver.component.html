@@ -1,0 +1,38 @@
+<div class="album py-5 adddriver mb-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form (ngSubmit)="addDriver()" #driverForm="ngForm">
+                            <div class="mb-3">
+                                <label for="driverName" class="form-label">Name</label>
+                                <input type="text" id="driverName" [(ngModel)]="driver.driver_name" name="driver_name" class="form-control" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="driverDepartment" class="form-label">Department</label>
+                                <select id="driverDepartment" [(ngModel)]="driver.driver_department" name="driver_department" class="form-control" required>
+                                    <option value="Food">Food</option>
+                                    <option value="Furniture">Furniture</option>
+                                    <option value="Electronic">Electronic</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="driverLicence" class="form-label">License</label>
+                                <input type="text" id="driverLicence" [(ngModel)]="driver.driver_licence" name="driver_licence" class="form-control" required />
+                            </div>
+                            <div class="mb-3 form-check form-switch">
+                                <input type="checkbox" id="driverAct" [(ngModel)]="driver.driver_isActive" name="driver_isActive" class="form-check-input">
+                                <label class="form-check-label" for="driverAct">isActive?</label>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a type="button" class="btn btn-secondary" routerLink="/drivers">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

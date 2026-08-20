@@ -1,0 +1,34 @@
+<h3 class="text-center my-3">Available Drivers</h3>
+
+<div class="container">
+    <ng-container *ngIf="driversList.length === 0; else driverTable">
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <h3>No drivers available currently</h3>
+        </div>
+    </ng-container>
+
+    <ng-template #driverTable>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">License</th>
+                    <th scope="col">Active Status</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let driver of driversList; index as i">
+                    <th scope="row">{{ driver._id }}</th>
+                    <td>{{ driver.driver_name | uppercase }}</td>
+                    <td>{{ driver.driver_department }}</td>
+                    <td>{{ driver.driver_licence }}</td>
+                    <td>{{ driver.driver_isActive ? 'Yes' : 'No' }}</td>
+                    <td><button (click)="deleteDriver(driver._id)" class="btn btn-danger">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-template>
+</div>

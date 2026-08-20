@@ -1,0 +1,34 @@
+<div class="container">
+    <h3 class="text-center my-2">Update Driver</h3>
+  
+    <div class="card shadow-sm">
+      <div class="card-body">
+      
+        <form (ngSubmit)="onSubmit()" #driverForm="ngForm">
+  
+          <div class="mb-3">
+            <label for="driverID" class="form-label">Driver ID</label>
+            <input type="text" [(ngModel)]="driver._id" name="driverID" class="form-control" id="driverID" placeholder="Enter Driver ID" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="driverLicense" class="form-label">License</label>
+            <input type="text" [(ngModel)]="driver.driver_licence" name="driverLicense" class="form-control" id="driverLicense" placeholder="Enter Driver License" required>
+          </div>
+  
+          <div class="mb-3">
+            <label for="driverDepartment" class="form-label">Department</label>
+            <select [(ngModel)]="driver.driver_department" name="driverDepartment" class="form-control" id="driverDepartment" required>
+              <option value="Food">Food</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Electronic">Electronic</option>
+            </select>
+          </div>
+  
+          <button type="submit" class="btn btn-primary" [disabled]="!driverForm.form.valid">Update Driver</button>
+          
+        </form>
+  
+      </div>
+    </div>
+</div>

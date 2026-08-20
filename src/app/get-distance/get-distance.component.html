@@ -1,0 +1,45 @@
+<div class="container mt-4">
+    <h2 class="text-center">Distance Calculator</h2>
+    
+    <!-- Check if the package list is empty -->
+    <ng-container *ngIf="packageList.length === 0; else packageTable">
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <h3>There are no Packages</h3>
+        </div>
+    </ng-container>
+
+    <!-- Template for displaying packages -->
+    <ng-template #packageTable>
+        <div *ngFor="let package of packageList; let i = index" class="mb-4">
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Weight</th>
+                        <th>Destination</th>
+                        <th>Description</th>
+                        <th>KMs to Melb</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ package._id }}</td>
+                        <td>{{ package.package_title }}</td>
+                        <td>{{ package.package_weight | kgToGrams }}</td>
+                        <td>{{ package.package_destination }}</td>
+                        <td>{{ package.description }}</td>
+                        <td>
+                            <button class="btn btn-success" (click)="generate(package)">D</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Display distance if available -->
+            <div *ngIf="package.distance">
+                <h3>{{ package.distance }}</h3>
+            </div>
+        </div>
+    </ng-template>
+</div>

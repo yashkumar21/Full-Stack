@@ -1,0 +1,19 @@
+.footer {
+    width: 100%;
+    height: 200px;
+    background-color: #007bff; /* Blue background */
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    justify-content: space-around;
+    bottom: 0;
+}
+
+.footer h5 {
+    color: #ffffff; 
+}
+
+.footer p {
+    color: #ffffff; 
+}

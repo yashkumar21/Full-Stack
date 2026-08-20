@@ -1,0 +1,87 @@
+<!-- Title of the package list -->
+<h3 class="text-center my-2">Package List</h3>
+
+<div class="container">
+    <!-- Check if the packages list is empty -->
+    @if(packagesList.length === 0) {
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <h3>We have no driver at the moment</h3>
+        </div>
+    } @else {
+        <!-- Display the packages in a table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Is Allocated</th>
+                    <th scope="col">Driver ID</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Driver</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through each package in the packages list -->
+                @for(packages of packagesList; track $index) {
+                    <tr>
+                        <th scope="row">{{ packages._id }}</th>
+                        <td>{{ packages.package_title }}</td>
+                        <td>{{ packages.package_weight | kgToGrams }}</td>
+                        <td>{{ packages.package_destination }}</td>
+                        <td>{{ packages.description }}</td>
+                        <td>{{ packages.isAllocated }}</td>
+                        <td>{{ packages.driver_id || 'No Driver Assigned' }}</td>
+                        <td>
+                            <!-- Button to delete the package -->
+                            <button (click)="deletePackage(packages._id)" class="btn btn-danger">X</button>
+                        </td>
+                        <td>
+                            <!-- Button to show drivers for the package -->
+                            <button (click)="showDrivers(packages)" class="btn btn-danger">?</button>
+                        </td>
+                    </tr>
+                    <!-- Check if the package is clicked to show driver details -->
+                    @if(packageClicked === packages) {
+                        <tr>
+                            <td colspan="8">
+                                <!-- Check if driver information is available -->
+                                @if(driverInfo) {
+                                    <div>
+                                        <div class="d-flex justify-content-center align-items-center" style="min-height: 100px;">
+                                            <h5>Driver Details</h5>
+                                        </div>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Department</th>
+                                                    <th>License</th>
+                                                    <th>Is Active?</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{ driverInfo.driver_name | uppercase }}</td>
+                                                    <td>{{ driverInfo.driver_department }}</td>
+                                                    <td>{{ driverInfo.driver_licence }}</td>
+                                                    <td>{{ driverInfo.driver_isActive }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                } @else {
+                                    <div class="d-flex justify-content-center align-items-center" style="min-height: 100px;">
+                                        <h5>No Driver Assigned</h5>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+</div>

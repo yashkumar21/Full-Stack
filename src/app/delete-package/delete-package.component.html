@@ -1,0 +1,40 @@
+<h3 class="text-center my-2">Package List</h3>
+
+<div class="container">
+    <ng-container *ngIf="packagesList.length === 0; else packageTable">
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <h3>We have no packages at the moment</h3>
+        </div>
+    </ng-container>
+    
+    <ng-template #packageTable>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Is Allocated</th>
+                    <th scope="col">Driver ID</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let package of packagesList; let i = index;">
+                    <th scope="row">{{ package._id }}</th>
+                    <td>{{ package.package_title }}</td>
+                    <td>{{ package.package_weight | kgToGrams }}</td>
+                    <td>{{ package.package_destination }}</td>
+                    <td>{{ package.description }}</td>
+                    <td>{{ package.isAllocated }}</td>
+                    <td>{{ package.driver_id || 'No Driver Assigned' }}</td>
+                    <td>
+                        <button (click)="deletePackage(package._id)" class="btn btn-danger">X</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-template>
+</div>

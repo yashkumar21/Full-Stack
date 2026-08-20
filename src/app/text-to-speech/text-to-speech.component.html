@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  <h1 class="text-center">Text to Speech Converter</h1>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Driver Id</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>License</th>
+        <th>Speech</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let driver of driverList; let i = index">
+        <td>{{ driver.driver_id }}</td>
+        <td>{{ driver.driver_name | uppercase }}</td>
+        <td>{{ driver.driver_department }}</td>
+        <td>{{ driver.driver_licence }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="convertToSpeech(driver.driver_licence, driver)">
+            Convert to Speech
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="chosenDriver" class="mt-3">
+    <h4>Text to Convert</h4>
+    <textarea [(ngModel)]="chosenDriver.driver_licence" rows="2" class="form-control"></textarea>
+  </div>
+
+  <div *ngIf="chosenDriver?.driver_audio" class="mt-3">
+    <h4>Converted Speech:</h4>
+    <audio #audioPlayer controls [src]="chosenDriver?.driver_audio" class="w-100"></audio>
+  </div>
+</div>
