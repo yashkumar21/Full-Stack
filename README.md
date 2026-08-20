@@ -231,9 +231,12 @@ MongoDB Atlas cluster, since Cloud Run has no persistent local disk for a self-h
 `server.js` reads `process.env.PORT`.
 
 **Firebase credentials**: `backend/service-account.json` is never baked into the image or
-committed — it's stored in GCP Secret Manager and mounted as a file at
-`/app/backend/service-account.json` in the Cloud Run service, so `backend/firebase.js`'s existing
-`require('./service-account.json')` works unchanged.
+committed — it's stored in GCP Secret Manager and mounted as a file into the Cloud Run service at
+**`/secrets/service-account.json`** (a dedicated empty path, not `/app/backend` — mounting a secret
+directly on top of a directory that already has application files in it replaces that directory's
+entire contents at runtime, which would delete `server.js` and `node_modules` from the running
+container). `FIREBASE_SERVICE_ACCOUNT_PATH=/secrets/service-account.json` is set as an env var so
+`backend/firebase.js` picks it up from there instead of the local-dev default.
 
 **Known limitation — single instance only** (`--max-instances=1`): `express-session` uses the
 default in-memory store and Socket.IO keeps connection state in-process, so neither survives being
