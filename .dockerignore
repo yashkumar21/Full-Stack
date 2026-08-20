@@ -1,0 +1,17 @@
+node_modules
+dist
+.angular
+.git
+.gitignore
+.dockerignore
+Dockerfile
+README.md
+
+backend/node_modules
+backend/.env
+backend/.env.example
+backend/service-account.json
+backend/FIT2095.json
+backend/audio/*.mp3
+
+.DS_Store

@@ -212,3 +212,34 @@ events.
 
 The frontend has real unit tests runnable via `ng test` (Karma + Jasmine). The backend does not
 have a test suite yet — its `npm test` script is a placeholder that always exits with an error.
+
+## Deployment (Google Cloud Run)
+
+The app is deployed as an installable PWA on Cloud Run, which serves the whole thing (built
+Angular app + REST API + Socket.IO) from one container on one HTTPS URL — service workers require
+HTTPS to register, which is why this needs a real deployment rather than just `localhost`.
+
+**Build**: the root `Dockerfile` is a two-stage build — Stage 1 runs `npm run build` to produce
+`dist/a3/browser`, Stage 2 installs backend dependencies and copies that build output alongside
+`backend/`, matching the relative path (`../dist/a3/browser`) `server.js` already expects. Nothing
+in `server.js`'s static-serving logic needed to change for this.
+
+**Environment variables** (Cloud Run service config): `MONGO_URL` (a hosted MongoDB — e.g. a free
+MongoDB Atlas cluster, since Cloud Run has no persistent local disk for a self-hosted Mongo),
+`SESSION_SECRET` (a random string, not the dev placeholder), plus the existing `GEMINI_API_KEY` and
+`GOOGLE_CLOUD_API_KEY`. `PORT` doesn't need to be set — Cloud Run injects it automatically and
+`server.js` reads `process.env.PORT`.
+
+**Firebase credentials**: `backend/service-account.json` is never baked into the image or
+committed — it's stored in GCP Secret Manager and mounted as a file at
+`/app/backend/service-account.json` in the Cloud Run service, so `backend/firebase.js`'s existing
+`require('./service-account.json')` works unchanged.
+
+**Known limitation — single instance only** (`--max-instances=1`): `express-session` uses the
+default in-memory store and Socket.IO keeps connection state in-process, so neither survives being
+split across multiple Cloud Run instances (a session created on one instance would fail auth
+checks on another). Capping at one instance avoids this without adding a Redis-backed session
+store / Socket.IO adapter — the right tradeoff for this app's traffic level. A second known
+limitation: TTS-generated `.mp3` files (`backend/audio/`) live on the container's ephemeral
+filesystem and are lost on redeploy or instance restart — acceptable since they're meant to be
+transient, generated on demand.
