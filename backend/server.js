@@ -38,7 +38,7 @@ const driverRouter = require('./routes/driver-router');
 const packageRouter = require('./routes/package-router');
 
 const app = express();
-const PORT_NUMBER = 8080;
+const PORT_NUMBER = process.env.PORT || 8080;
 const translate = new Translate({ key: google_cloud_api_key }); // Initialize the Google Translate client
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -53,7 +53,7 @@ app.use(express.static(path.join(__dirname, '../dist/a3/browser')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
-  secret: 'your-secret-key',
+  secret: process.env.SESSION_SECRET || 'your-secret-key',
   resave: false,
   saveUninitialized: true,
 }));
@@ -179,7 +179,7 @@ io.on('connection', (socket) => {
 });
 
 // MongoDB Connection
-const url = 'mongodb://127.0.0.1:27017/';
+const url = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/';
 async function connect() {
   try {
     await mongoose.connect(url);
